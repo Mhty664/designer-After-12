@@ -96,10 +96,13 @@
     }
 
     .project img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+    
+  width: 100%;
+  aspect-ratio: 4 / 3;   /* تقدر تغيّرها 1/1 أو 16/9 */
+  object-fit: contain;  /* يمنع القص */
+  background: #0B0B0D;  /* لون خلفية لو في فراغ */
+}
+    
 
     .project h3 {
       padding: 18px;
@@ -231,4 +234,3 @@
 
 </body>
 </html>
-
