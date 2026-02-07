@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Designer After 12</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #0B0B0D;
+      color: #F2F2F2;
+      line-height: 1.7;
+    }
+
+    /* Header */
+    header {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: radial-gradient(circle at top, #141417, #0B0B0D);
+    }
+
+    /* Brand Title */
+    .brand-title {
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .brand-title span {
+      display: inline-block;
+      color: #3A7BFF;
+      transition:
+        transform 0.4s ease,
+        letter-spacing 0.4s ease,
+        text-shadow 0.4s ease;
+    }
+
+    .brand-title:hover span {
+      transform: scale(1.25);
+      letter-spacing: 3px;
+      text-shadow:
+        0 0 10px rgba(58, 123, 255, 0.7),
+        0 0 25px rgba(58, 123, 255, 0.6),
+        0 0 40px rgba(58, 123, 255, 0.5);
+    }
+
+    header p {
+      margin-top: 18px;
+      font-size: 18px;
+      color: #A0A0A0;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    /* About */
+    .about {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 17px;
+      color: #CFCFCF;
+    }
+
+    /* Projects */
+    .projects {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      grid-auto-rows: 1fr;
+    }
+
+    /* Card */
+    .project {
+      background: #141417;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.35s ease;
+      cursor: pointer;
+      border: 1px solid #1E1E22;
+    }
+
+    .project:hover {
+      transform: translateY(-12px);
+      border-color: #3A7BFF;
+    }
+
+    .project img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      filter: grayscale(30%);
+    }
+
+    .project:hover img {
+      transform: scale(1.08);
+      filter: grayscale(0%);
+    }
+
+    .project h3 {
+      padding: 22px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h1 class="brand-title">
+      Designer <span>After 12</span>
+    </h1>
+    <p>
+      Design starts when the world sleeps.  
+      Calm visuals. Smart thinking. Strong identity.
+    </p>
+  </div>
+</header>
+
+<section class="about">
+  I’m a graphic designer focused on visual identity and branding.  
+  I create clean, meaningful designs inspired by late-night focus and silence.
+</section>
+
+<section class="projects">
+
+  <div class="project">
+    <img src="stitsh.png" alt="NOX Coffee Branding">
+    <h3>NOX Coffee — Brand Identity</h3>
+  </div>
+
+  <div class="project">
+    <img src="Questionsty.png" alt="LUMO Skincare">
+    <h3>LUMO — Social Media System</h3>
+  </div>
+
+  <div class="project">
+    <img src="cover english.png" alt="After Midnight Posters">
+    <h3>After Midnight — Poster Series</h3>
+  </div>
+
+  <div class="project">
+    <img src="one piece.png" alt="90 Day Design">
+    <h3>90 Day — Visual Design</h3>
+  </div>
+
+  <div class="project">
+    <img src="Logo.png" alt="Concept Design">
+    <h3>Concept — Visual Identity</h3>
+  </div>
+
+  <div class="project">
+    <img src="cover H.png" alt="Poster Concept">
+    <h3>Concept — Poster Design</h3>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 Designer After 12 — All Rights Reserved
+</footer>
+
+</body>
+</html>
