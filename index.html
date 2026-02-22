@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designer After 12</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif}
+body{background:#0B0B0D;color:#F2F2F2}
+
+/* Header */
+header{
+min-height:75vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:radial-gradient(circle at top,#141417,#0B0B0D);
+padding:30px;
+}
+
+.brand-title{font-size:48px;font-weight:700}
+.brand-title span{color:#3A7BFF}
+
+/* Projects Grid */
+.projects{
+max-width:1100px;
+margin:60px auto;
+padding:0 20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.project{
+background:#141417;
+border-radius:16px;
+overflow:hidden;
+border:1px solid #1E1E22;
+cursor:pointer;
+transition:.3s;
+display:flex;
+flex-direction:column;
+}
+
+.project:hover{
+transform:translateY(-8px);
+border-color:#3A7BFF;
+}
+
+/* 🔥 تم تعديل الصور هنا */
+.project img{
+width:100%;
+height:260px;          /* ارتفاع ثابت */
+object-fit:contain;    /* يمنع القص */
+background:#0f0f12;    /* خلفية للفراغ */
+padding:10px;
+}
+
+.project h3{
+padding:18px;
+font-size:16px;
+margin-top:auto;
+}
+
+/* ===== Slider Modal ===== */
+.slider-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.95);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+overflow:hidden;
+}
+
+.slider-container{
+position:relative;
+width:90%;
+max-width:900px;
+}
+
+.slide{
+display:none;
+animation:fade .5s ease;
+}
+
+/* 🔥 تم تعديل صور السلايدر */
+.slide img{
+max-width:100%;
+max-height:80vh;
+object-fit:contain;
+border-radius:16px;
+transition:.4s;
+cursor:zoom-in;
+}
+
+.slide img.zoomed{
+transform:scale(1.6);
+cursor:zoom-out;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}
+
+.arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:40px;
+color:white;
+cursor:pointer;
+padding:10px;
+user-select:none;
+}
+
+.prev{left:-60px}
+.next{right:-60px}
+
+.close{
+position:fixed;
+top:20px;
+right:30px;
+font-size:35px;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+.prev{left:10px}
+.next{right:10px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div>
+<h1 class="brand-title">Designer <span>After 12</span></h1>
+</div>
+</header>
+
+<section class="projects">
+
+<div class="project" onclick="openSlider('notebook')">
+<img src="stitsh.jpg">
+<h3>Notebook</h3>
+</div>
+
+<div class="project" onclick="openSlider('cover')">
+<img src="cover english.png">
+<h3>Cover</h3>
+</div>
+
+<div class="project" onclick="openSlider('A4')">
+<img src="eng2.jpg">
+<h3>A4</h3>
+</div>
+
+<div class="project" onclick="openSlider('A3')">
+<img src="hisa4.jpg">
+<h3>A3</h3>
+</div>
+
+<div class="project" onclick="openSlider('logo')">
+<img src="Untitled-.png">
+<h3>Logo — Visual Identity</h3>
+</div>
+
+<div class="project" onclick="openSlider('poster')">
+<img src="day.jpg">
+<h3>Poster Design</h3>
+</div>
+
+</section>
+
+<!-- Slider Modal -->
+<div class="slider-modal" id="sliderModal">
+<span class="close" onclick="closeSlider()">×</span>
+<div class="slider-container">
+<span class="arrow prev" onclick="changeSlide(-1)">❮</span>
+<span class="arrow next" onclick="changeSlide(1)">❯</span>
+<div id="slidesWrapper"></div>
+</div>
+</div>
+
+<script>
+
+const galleries={
+notebook:["stitsh.jpg","one piece.jpg"],
+game:["Questionsty.jpg"],
+cover:["shre3y.jpg","mohamed.jpg","mum.jpg","cover english.png"],
+A4:["hist.jpg","hist1.jpg","eng.jpg","eng2.jpg","his.jpg","ch.jpg","ch2.jpg","ch1.jpg","chi1.jpg","wr.jpg","wr2.jpg","chose.jpg"],
+A3:["Ex2.jpg","ex.jpg","choose.jpg","ar.jpg","hisa4.jpg","Torf.jpg"],
+logo:["Untitled-.png","Questionsty.png"],
+poster:["qu.jpg","shre3y-ramdan.jpg","day.jpg"]
+};
+
+let currentIndex=0;
+let currentGallery=[];
+
+function openSlider(name){
+currentGallery=galleries[name];
+currentIndex=0;
+const wrapper=document.getElementById("slidesWrapper");
+wrapper.innerHTML="";
+
+currentGallery.forEach(src=>{
+const div=document.createElement("div");
+div.classList.add("slide");
+div.innerHTML=`<img src="${src}" onclick="toggleZoom(this)">`;
+wrapper.appendChild(div);
+});
+
+document.getElementById("sliderModal").style.display="flex";
+showSlide();
+}
+
+function showSlide(){
+const slides=document.querySelectorAll(".slide");
+slides.forEach(s=>s.style.display="none");
+slides[currentIndex].style.display="block";
+}
+
+function changeSlide(n){
+currentIndex+=n;
+if(currentIndex<0) currentIndex=currentGallery.length-1;
+if(currentIndex>=currentGallery.length) currentIndex=0;
+showSlide();
+}
+
+function closeSlider(){
+document.getElementById("sliderModal").style.display="none";
+}
+
+function toggleZoom(img){
+img.classList.toggle("zoomed");
+}
+
+/* Swipe */
+let startX=0;
+document.getElementById("sliderModal").addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+
+document.getElementById("sliderModal").addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50) changeSlide(1);
+if(endX-startX>50) changeSlide(-1);
+});
+
+/* ESC */
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape") closeSlider();
+});
+
+</script>
+
+</body>
+</html>
